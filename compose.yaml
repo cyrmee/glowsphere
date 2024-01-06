@@ -1,0 +1,27 @@
+services:
+  glowsphere-db-dev:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: glowsphere-db-dev
+    networks:
+      - network
+    # restart: always
+  
+  glowsphere-db-test:
+    image: postgres:latest
+    ports:
+      - 5433:5432 
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: glowsphere-db-test
+    networks:
+      - network
+    # restart: always
+
+networks:
+  network:
