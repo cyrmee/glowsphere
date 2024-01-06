@@ -1,11 +1,11 @@
-import * as classValidator from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class LoginDto {
-  @classValidator.IsEmail()
-  @classValidator.IsNotEmpty()
+  @IsEmail()
+  @IsNotEmpty()
   email: string;
 
-  @classValidator.IsString()
-  @classValidator.IsNotEmpty()
+  @IsString()
+  @IsNotEmpty()
   password: string;
 }
