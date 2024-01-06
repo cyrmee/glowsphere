@@ -6,11 +6,11 @@ import { EditUserDto } from './dto';
 export class UserService {
   constructor(private glowsphereDb: PrismaService) {}
 
-  async getUser(id: number) {}
+  // async getUser(id: number) {}
 
-  async getUsers() {}
+  // async getUsers() {}
 
-  async createUser() {}
+  // async createUser() {}
 
   async updateUser(id: number, dto: EditUserDto) {
     const user = await this.glowsphereDb.user.update({

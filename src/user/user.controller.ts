@@ -1,4 +1,12 @@
-import { Get, Controller, UseGuards, Patch, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Get,
+  Controller,
+  UseGuards,
+  Patch,
+  Body,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { GenericRequest, GetUser } from '../auth/decorator';
 import { JwtGuard } from '../auth/guard'; // * use relative paths
 import { EditUserDto } from './dto';
