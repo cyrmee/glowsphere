@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateBookmarkDto, UpdateBookmarkDto } from './dto';
 
@@ -50,6 +50,14 @@ export class BookmarkService {
     bookmarkId: number,
     updateBookmarkDto: UpdateBookmarkDto,
   ) {
+    const bookmarkExists = await this.glowsphereDb.bookmark.findUnique({
+      where: { id: bookmarkId, userId: userId },
+    });
+    if (!bookmarkExists)
+      throw new NotFoundException(
+        `Resource not found with User Id: ${userId} and Bookmark Id: ${bookmarkId}`,
+      );
+
     const bookmark = await this.glowsphereDb.bookmark.update({
       where: { id: bookmarkId, userId: userId },
       data: {
@@ -65,9 +73,17 @@ export class BookmarkService {
   }
 
   async deleteBookmark(userId: number, bookmarkId: number) {
-    const bookmark = await this.glowsphereDb.bookmark.delete({
+    const bookmarkExists = await this.glowsphereDb.bookmark.findUnique({
       where: { id: bookmarkId, userId: userId },
     });
-    return bookmark;
+
+    if (!bookmarkExists)
+      throw new NotFoundException(
+        `Resource not found with User Id: ${userId} and Bookmark Id: ${bookmarkId}`,
+      );
+
+    return await this.glowsphereDb.bookmark.delete({
+      where: { id: bookmarkId, userId: userId },
+    });
   }
 }

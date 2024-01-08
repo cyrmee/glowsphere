@@ -11,7 +11,10 @@ import { GenericRequest, GetUser } from '../auth/decorator';
 import { JwtGuard } from '../auth/guard'; // * use relative paths
 import { EditUserDto } from './dto';
 import { UserService } from './user.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('users')
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
