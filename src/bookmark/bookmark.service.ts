@@ -30,6 +30,18 @@ export class BookmarkService {
     return bookmark;
   }
 
+  async getBookmarkByTitle(userId: number, title: string) {
+    const bookmarks = await this.glowsphereDb.bookmark.findMany({
+      where: { title: title, userId: userId },
+      include: {
+        user: true,
+      },
+    });
+
+    bookmarks.forEach((bookmark) => delete bookmark.user.hash);
+    return bookmarks;
+  }
+
   async createBookmark(userId: number, createBookmarkDto: CreateBookmarkDto) {
     const bookmark = await this.glowsphereDb.bookmark.create({
       data: {

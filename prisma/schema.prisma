@@ -10,6 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  Admin
+  Student
+  Staff
+  Agent
+}
+
 // Models
 model User {
   id        Int      @id @default(autoincrement())
@@ -22,8 +29,10 @@ model User {
   firstName String?
   lastName  String?
 
+  roles Role[]
+
   bookmarks Bookmark[]
-  
+
   @@map("users")
 }
 
@@ -37,7 +46,7 @@ model Bookmark {
   link        String
 
   userId Int
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("bookmarks")
 }
