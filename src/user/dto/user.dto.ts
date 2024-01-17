@@ -12,4 +12,8 @@ export class EditUserDto {
   @IsOptional()
   @IsString()
   lastName?: string;
+
+  @IsOptional()
+  @IsString()
+  image?: string;
 }

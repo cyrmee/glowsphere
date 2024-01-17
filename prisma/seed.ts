@@ -11,6 +11,7 @@ async function main() {
       hash: await argon.hash('Password@1234'),
       firstName: 'John',
       lastName: 'Doe',
+      image: 'https://example.com/john.jpg',
       roles: [Role.Admin, Role.Agent],
       bookmarks: {
         create: [
